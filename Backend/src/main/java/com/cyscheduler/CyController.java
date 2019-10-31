@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class GeodashController {
+public class CyController {
     @Autowired
     private UserRepository userRepository;
 
-    public GeodashController(UserRepository ur) {
+    public CyController(UserRepository ur) {
         userRepository = ur;
     }
 
