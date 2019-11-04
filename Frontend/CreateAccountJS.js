@@ -3,18 +3,24 @@ function JSValidate(){
 	var password = document.getElementById("password");
 	var email = document.getElementById("email");
 	var major = document.getElementById("major");
-	if(!alphaNumCheck(p1.value)){
-        alert("Username Name Must contain only alphabetic or numeric characters.");
+	if(!alphaNumCheck(username.value)){
+        alert("Username Must contain only alphabetic or numeric characters.");
 	}
-	if(!alphaNumCheck(p2.value)){
-        alert("Last Name Must contain only alphabetic or numericcharacters.");
+    else if(username.value.length == 0 || username.value.length > 15){
+        alert("Username must contain atleast 1 and at most 14 characters");
+    }
+    if(!checkEmail(email.value)){
+        alert("Please Enter a valid email address");
 	}
-	if(p3.value == ""){
-        alert("Please Select a Field");
+	if(!alphaNumCheck(password.value)){
+        alert("Password must contain only alphabetic or numericcharacters.");
 	}
-	if(p4.value == ""){
-        alert("Please Select a Field");
-	}
+    else if(password.value.length < 8 || password.value.length > 15){
+        alert("Password must be atleast 8 characters and at most 14 characters");
+    }
+    if(major.value == ""){
+        alert("Please Fill out the Major filed")
+    }
     
 }
 	
@@ -27,7 +33,12 @@ function alphaNumCheck(entry) {
     }
 }
 
-function passwordCheck(entry){
-    
+function checkEmail(entry){
+    var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
+    if(entry != null && entry.match(regex)){
+        return true
+    }
+    return false;
 }
+
 
