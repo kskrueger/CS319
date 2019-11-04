@@ -40,5 +40,11 @@ function checkEmail(entry){
     }
     return false;
 }
-
+function showPass(entry) {
+  if (entry.type === "password") {
+    entry.type = "text";
+  } else {
+    entry.type = "password";
+  }
+}
 
