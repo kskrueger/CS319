@@ -9,7 +9,7 @@ function JSValidate(){
             var url = "http://coms-319-078.cs.iastate.edu:8080/user"; //HERE
         
             // open a connection 
-            xhr.open("GET", url, true); 
+            xhr.open("POST", url, true); 
   
             // Set the request header i.e. which type of content you are sending 
             xhr.setRequestHeader("Content-Type", "application/json"); 
