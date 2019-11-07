@@ -4,16 +4,22 @@ function JSValidate(){
 	var email = document.getElementById("email");
 	var major = document.getElementById("major");
     var userList = [{}];
-    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var xhr = new XMLHttpRequest();
-    var url = "http://coms-319-078.cs.iastate.edu:8080/user"; //HERE
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({"username":"abc"}));
-    alert("HELLO");
-    alert(xhr.status);
-    alert(xhr.responseText);
-    //xhr.setRequestHeader("Content-Type", "application/json");
+            // Creating a XHR object 
+            var xhr = new XMLHttpRequest();
+            var url = "http://coms-319-078.cs.iastate.edu:8080/user"; //HERE
+        
+            // open a connection 
+            xhr.open("GET", url, true); 
+  
+            // Set the request header i.e. which type of content you are sending 
+            xhr.setRequestHeader("Content-Type", "application/json"); 
+
+  
+            // Converting JSON data to string 
+            var data = JSON.stringify({"uuid": 10, "username":username.value, "password":password.value, "major":major.value, "email":email.value}); 
+  
+            // Sending data with the request 
+            xhr.send(data);  
     var pass = true;
 	if(!alphaNumCheck(username.value)){
         alert("Username Must contain only alphabetic or numeric characters.");
@@ -41,9 +47,8 @@ function JSValidate(){
     }
     if(pass === true){
         var Json = JSON.stringify({"username":username.value, "password":password.value, "major":major.value, "email":email.value});
-        //xhr.send(Json);
+        xhr.send(Json);
     }
-    //xhr.send(JSON.stringify({"username":"abcddddd"}));
 }
 	
 function alphaNumCheck(entry) {
