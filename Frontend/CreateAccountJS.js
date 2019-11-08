@@ -13,13 +13,7 @@ function JSValidate(){
   
             // Set the request header i.e. which type of content you are sending 
             xhr.setRequestHeader("Content-Type", "application/json"); 
-
-  
-            // Converting JSON data to string 
-            var data = JSON.stringify({"uuid": 10, "username":username.value, "password":password.value, "major":major.value, "email":email.value}); 
-  
-            // Sending data with the request 
-            xhr.send(data);  
+    
     var pass = true;
 	if(!alphaNumCheck(username.value)){
         alert("Username Must contain only alphabetic or numeric characters.");
