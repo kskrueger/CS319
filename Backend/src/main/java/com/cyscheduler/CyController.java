@@ -23,6 +23,7 @@ public class CyController {
         return new Gson().toJson(userRepository.findAll());
     }
 
+    @CrossOrigin
     @PostMapping("/user")
     public String postUser(@RequestBody User user) {
         userRepository.save(user);
