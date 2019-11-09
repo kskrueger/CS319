@@ -7,12 +7,13 @@ function JSValidate(){
             // Creating a XHR object 
             var xhr = new XMLHttpRequest();
             var url = "http://coms-319-078.cs.iastate.edu:8080/user"; //HERE
-        
+            
             // open a connection 
             xhr.open("POST", url, true); 
   
             // Set the request header i.e. which type of content you are sending 
             xhr.setRequestHeader("Content-Type", "application/json"); 
+            xhr.withCredentials = true;
     
     var pass = true;
 	if(!alphaNumCheck(username.value)){
@@ -42,6 +43,8 @@ function JSValidate(){
     if(pass === true){
         var Json = JSON.stringify({"username":username.value, "password":password.value, "major":major.value, "email":email.value});
         xhr.send(Json);
+        alert("Account Created!");
+        window.open('CySchedulerHTML.html');
     }
 }
 	
