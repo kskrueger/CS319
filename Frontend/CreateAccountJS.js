@@ -13,7 +13,6 @@ function JSValidate(){
   
             // Set the request header i.e. which type of content you are sending 
             xhr.setRequestHeader("Content-Type", "application/json"); 
-            xhr.withCredentials = true;
     
     var pass = true;
 	if(!alphaNumCheck(username.value)){
