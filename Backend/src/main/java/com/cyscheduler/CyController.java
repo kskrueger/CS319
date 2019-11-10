@@ -13,11 +13,13 @@ public class CyController {
         userRepository = ur;
     }
 
+    @CrossOrigin
     @GetMapping("/user/{userId}")
     public User getUser(@PathVariable Integer userId) {
         return (User)userRepository.findByUuid(userId).toArray()[0];
     }
 
+    @CrossOrigin
     @GetMapping("/users")
     public String getUsers() {
         return new Gson().toJson(userRepository.findAll());
