@@ -1,0 +1,39 @@
+p1{
+    text-align: center;
+    font-size: 35;
+    color: black;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10;
+    font-weight: bold;
+    height: 90%;
+    padding: 50;
+    margin: 100
+}
+
+p2{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 35;
+    color: black;
+    margin-top: 10;
+    font-weight: bold;
+    height: 90%;
+    padding: 50;
+    margin: 100
+}
+
+createSchedule{
+    text-align:center;
+    
+}
+/*
+.white-box {
+    background-color: white;
+    background-repeat:no-repeat;
+    background-position: center center;
+    height: 90%;
+    width: 90%;
+    padding: 0;
+    margin: 50;
+}*/
