@@ -23,9 +23,29 @@ p2{
     margin: 100
 }
 
-createSchedule{
-    text-align:center;
-    
+.CreateSchedule{
+    position:absolute;
+    transition: .5s ease;
+    top: 10%;
+    left: 25%; 
+}
+.ViewSchedule{
+    position:absolute;
+    transition: .5s ease;
+    top: 10%;
+    left: 35%; 
+}
+.ExploreCourses{
+    position:absolute;
+    transition: .5s ease;
+    top: 15%;
+    left: 25%; 
+}
+.EditGraduationPlan{
+    position:absolute;
+    transition: .5s ease;
+    top: 15%;
+    left: 35%; 
 }
 /*
 .white-box {
