@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draggable Courses</title>
+    <style>
+        .mydiv {
+            position: absolute;
+            z-index: 9;
+            background-color: #f1f1f1;
+            text-align: center;
+            width: 120px;
+            height: 120px;
+            border: 2px solid #d3d3d3;
+        }
+
+        .mydivheader {
+            padding: 5px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196F3;
+            color: #fff;
+        }
+    </style>
+    <script type = "text/javascript" src="DraggableScreenJS.js"></script>
+</head>
+<body>
+
+<h1>Draggable Courses</h1>
+Course:<label>
+    <input type='text' name='courseName'>
+</label><br>
+<p>Click and hold the mouse button down while moving the DIV element</p>
+<button onclick="addCourse()">Add course</button>
+
+<div id="courses">
+
+</div>
+
+</body>
+</html>
