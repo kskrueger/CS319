@@ -3,11 +3,12 @@ package com.cyscheduler.util;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class PreReqParsing {
     //class to sort array list by index in given string
@@ -25,7 +26,7 @@ public class PreReqParsing {
     public ArrayList<ArrayList<String>> parse(String input) {
         ArrayList<ArrayList<String>> prereqs = new ArrayList<>();
         long start = System.currentTimeMillis();
-        ArrayList<String> allCourses = read("com/data/CourseList");
+        ArrayList<String> allCourses = read("/src/main/java/com/cyscheduler/util/CourseList");
         ArrayList<String> courseList = new ArrayList<>();
         for (String course : allCourses) {
             if (input.toLowerCase().contains(course.toLowerCase())) {
@@ -67,9 +68,10 @@ public class PreReqParsing {
         return prereqs;
     }
 
-    private ArrayList read(String fileName) {
+    public ArrayList read(String fileName) {
         String contents = "";
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        String filePath = new File("").getAbsolutePath();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath+fileName))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {

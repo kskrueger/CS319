@@ -25,7 +25,7 @@ function addCourse() {
 
 function getCourse(nodeNum) {
     let name = document.getElementById('courseInput'+nodeNum).value;
-    let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
+    let a = Get('http://localhost:8080/course/'+name);
     let b = JSON.parse(a);
     alert(name + ': ' +a);
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;

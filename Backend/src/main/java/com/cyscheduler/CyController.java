@@ -1,5 +1,6 @@
 package com.cyscheduler;
 
+import com.cyscheduler.util.PreReqParsing;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +61,7 @@ public class CyController {
         if (!password.equals("Mitra309")) {
             return "You shouldn't be here! Incorrect password to update!";
         }
-        ArrayList<String> allCourses = read("/Users/kskrueger/Documents/Classes/CS319/g24/Backend/src/main/java/com/data/CourseList");
+        ArrayList<String> allCourses = new PreReqParsing().read("/src/main/java/com/cyscheduler/util/CourseList");
         for (String courseName : allCourses) {
             courseName = courseName.replaceAll("[^A-Za-z0-9 ]", "");
             try {
@@ -73,24 +74,5 @@ public class CyController {
         }
         int n = courseRepository.findAll().size();
         return String.format("DB updated with %d courses", n);
-    }
-
-    private ArrayList read(String fileName) {
-        String contents = "";
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            contents = sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Gson gson = new Gson();
-        return gson.fromJson(contents, ArrayList.class);
     }
 }
