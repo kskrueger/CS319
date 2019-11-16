@@ -25,7 +25,7 @@ public class PreReqParsing {
     public ArrayList<ArrayList<String>> parse(String input) {
         ArrayList<ArrayList<String>> prereqs = new ArrayList<>();
         long start = System.currentTimeMillis();
-        ArrayList<String> allCourses = read("/Users/kskrueger/Documents/Classes/CS319/g24/Backend/src/main/java/com/data/CourseList");
+        ArrayList<String> allCourses = read("com/data/CourseList");
         ArrayList<String> courseList = new ArrayList<>();
         for (String course : allCourses) {
             if (input.toLowerCase().contains(course.toLowerCase())) {
