@@ -27,7 +27,7 @@ function getCourse(nodeNum) {
     let name = document.getElementById('courseInput'+nodeNum).value;
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
     let b = JSON.parse(a);
-    alert(name + ': ' +a);
+    //alert(name + ': ' +a);
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
     document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
