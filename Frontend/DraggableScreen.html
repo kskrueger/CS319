@@ -3,7 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Draggable Courses</title>
-    <style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type = "text/javascript" src="DraggableScreenJS.js"></script>
+</head>
+<body>
+
+<h1>Class Schedule Creator</h1>
+<p1>Current Semester: <label>
+    <input type='text' name='courseName'>
+</label></p1><br>
+<!--
+Course:<label>
+    <input type='text' name='courseName'>
+</label><br>
+-->
+<p>Click and hold the mouse button down to move courses. </p>
+<button onclick="addCourse()">Add course</button>
+
+<div id="courses">
+
+</div>
+        <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background: url(pic1.jpg);
+            background-size: cover;
+            background-position: center
+
+        }   
         .mydiv {
             position: absolute;
             z-index: 9;
@@ -29,23 +58,22 @@
             font: 12pt sans-serif;
             width: 100px;
         }
+        h1{
+            font-weight: bold;
+            color: white;
+            font-size: 42px;
+        }
+        p1{
+            font-weight: bold;
+            color: white;
+            font-size: 28px;
+        }
+        p{
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+        }
     </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type = "text/javascript" src="DraggableScreenJS.js"></script>
-</head>
-<body>
-
-<h1>Draggable Courses</h1>
-Course:<label>
-    <input type='text' name='courseName'>
-</label><br>
-<p>Click and hold the mouse button down while moving the DIV element</p>
-<button onclick="addCourse()">Add course</button>
-
-<div id="courses">
-
-</div>
 
 </body>
 </html>
