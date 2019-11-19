@@ -20,6 +20,7 @@ Course:<label>
 -->
 <p>Click and hold the mouse button down to move courses. </p>
 <button onclick="addCourse()">Add course</button>
+<button onclick="window.open('SchedulingPage.html')" id = "backbutton">Back</button>
 
 <div id="courses">
 
@@ -27,10 +28,11 @@ Course:<label>
         <style>
         body{
             margin: 0;
-            padding: 0;
-            background: url(pic1.jpg);
-            background-size: cover;
-            background-position: center
+            padding: 10;
+            background: url(classroom.png);
+            background-size: 100%;
+            width: 100%;
+            height: 100%;
 
         }   
         .mydiv {
@@ -73,6 +75,10 @@ Course:<label>
             color: white;
             font-size: 24px;
         }
+        .backbutton{
+            padding-left: 30px;
+            }
+        
     </style>
 
 </body>
