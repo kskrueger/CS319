@@ -64,22 +64,51 @@ Course:<label>
             font-weight: bold;
             color: white;
             font-size: 42px;
+            padding-left: 165px;
         }
         p1{
             font-weight: bold;
             color: white;
             font-size: 28px;
+            padding-left: 165px;
         }
         p{
             font-weight: bold;
             color: white;
             font-size: 24px;
+            padding-left: 165px;
         }
-        .backbutton{
-            padding-left: 30px;
+            #backbutton{
+                padding-left: 195px;
+            }
+        .sidenav {
+            height: 100%; 
+            width: 160px; 
+            position: fixed; 
+            top: 0; 
+            background-color: #111; 
+            padding-top: 20px;
+        }
+            .sidenav a {
+            padding: 1px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            }
+            .sidenav a:hover {
+            color: white;
             }
         
     </style>
+    
+<div class="sidenav">
+  <a href="#" onclick="window.open('SchedulingPage')">Main Menu</a>
+  <a href="#">View Schedule</a>
+  <a href="#">Explore Courses</a>
+  <a href="#">Edit Grad Plan</a>
+  <a href="#" onclick="window.open('CySchedulerHTML.html')">Sign Out</a>
+</div>
 
 </body>
 </html>
