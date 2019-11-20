@@ -3,37 +3,27 @@
 <title> Main Menu </title>
     <link rel = "stylesheet" type = "text/css" href = MainMenu.CSS>
 <body>
-    <body style="background-color:darkgray;">
         <form>
             <p1>Welcome to CyScheduler!<br></p1>
-            <p2>This application was designed to plan class schedules for future semesters.</p2>
-            <div class="CreateSchedule">
-            <button onclick="openCreateSchedule()">Create Schedule</button> 
-             </div> 
-            <div class="ViewSchedule">
-            <button onclick="">View Schedule</button> 
-             </div>
-            <div class="ExploreCourses">
-            <button onclick="">Explore Courses</button> 
-             </div>
-            <div class="EditGraduationPlan">
-            <button onclick="">Edit Graduation Plan</button> 
-             </div> 
-            
+            <p2>This application was designed to plan class schedules for future semesters.</p2>     
             <script>
             function openCreateSchedule(){
                 window.open('DraggableScreen.html');
             }
-            
             </script>
-            
-        
-<!--
-        <div class="white-box">
-            Content
-        </div>
--->
         </form>
+    
+    
+    
+<div class="sidenav">
+  <a href="#" onclick="window.open('DraggableScreen.html')">Create Schedule</a>
+  <a href="#">View Schedule</a>
+  <a href="#">Explore Courses</a>
+  <a href="#">Edit Grad Plan</a>
+  <a href="#" onclick="window.open('CySchedulerHTML.html')">Sign Out</a>
+</div>
+<div class="main">
+</div>
     </body>
     </head>
 </html>

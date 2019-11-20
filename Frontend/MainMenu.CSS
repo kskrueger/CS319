@@ -1,13 +1,21 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(classroom.png);
+    background-size: cover;
+    background-position: center
+
+}
 p1{
     text-align: center;
     font-size: 35;
-    color: black;
+    color: white;
     margin: 0 auto;
     text-align: center;
     margin-top: 10;
     font-weight: bold;
-    height: 90%;
-    padding: 50;
+    padding-bottom: 50px;
+    padding: 70;
     margin: 100
 }
 
@@ -15,45 +23,28 @@ p2{
     margin: 0 auto;
     text-align: center;
     font-size: 35;
-    color: black;
+    color: white;
     margin-top: 10;
     font-weight: bold;
     height: 90%;
-    padding: 50;
+    padding: 70;
     margin: 100
 }
-
-.CreateSchedule{
-    position:absolute;
-    transition: .5s ease;
-    top: 10%;
-    left: 25%; 
+.sidenav {
+  height: 100%; 
+  width: 160px; 
+  position: fixed; 
+  top: 0; 
+  background-color: #111; 
+  padding-top: 20px;
 }
-.ViewSchedule{
-    position:absolute;
-    transition: .5s ease;
-    top: 10%;
-    left: 35%; 
+.sidenav a {
+  padding: 1px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
 }
-.ExploreCourses{
-    position:absolute;
-    transition: .5s ease;
-    top: 15%;
-    left: 25%; 
+.sidenav a:hover {
+  color: white;
 }
-.EditGraduationPlan{
-    position:absolute;
-    transition: .5s ease;
-    top: 15%;
-    left: 35%; 
-}
-/*
-.white-box {
-    background-color: white;
-    background-repeat:no-repeat;
-    background-position: center center;
-    height: 90%;
-    width: 90%;
-    padding: 0;
-    margin: 50;
-}*/
