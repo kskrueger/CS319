@@ -28,10 +28,27 @@ function getCourse(nodeNum) {
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
     let b = JSON.parse(a);
     //alert(name + ': ' +a);
+    if (nodeNum in courseNodes) {
+        delete courseNodes[nodeNum];
+    }
+    courseNodes.push({
+        key:   nodeNum,
+        value: b
+    });
+    updateCredits();
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
     document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
     return b;
+}
+
+function updateCredits() {
+    alert(courseNodes[1].credits);
+    let sum = 0;
+    for (let node in courseNodes) {
+        sum += node.value.credits;
+    }
+    document.getElementById('creditsTotal').innerText = "Total Credits: "+sum;
 }
 
 function Get(yourUrl){
