@@ -10,10 +10,10 @@
 <body>
 
 <h1>Class Schedule Creator</h1>
-<p1>Current Semester: <label>
-    <input type='text' name='courseName'>
-</label></p1><br>
-<label id="creditsTotal">Total Credits: </label>
+<p1>Current Semester:
+    <label><input type='text' name='courseName'></label>
+    <label id="creditsTotal">Total Credits: </label>
+</p1><br>
 <!--
 Course:<label>
     <input type='text' name='courseName'>
@@ -23,19 +23,20 @@ Course:<label>
 <button onclick="addCourse()" id="courseButton">Add course</button>
 <button onclick="window.open('SchedulingPage.html')" id = "backbutton">Back</button>
 
-<div id="courses">
-
-</div>
+<div id="courses" class="shift"></div>
         <style>
         body{
             margin: 0;
-            padding: 10;
+            padding: 10px;
             background: url(classroom.png);
             background-size: 100%;
             width: 100%;
             height: 100%;
 
-        }   
+        }
+        .shift {
+            padding-left: 165px;
+        }
         .mydiv {
             position: absolute;
             z-index: 9;
@@ -45,7 +46,6 @@ Course:<label>
             height: 150px;
             border: 2px solid #d3d3d3;
         }
-
         .mydivheader {
             padding: 5px;
             cursor: move;
@@ -53,7 +53,6 @@ Course:<label>
             background-color: #2196F3;
             color: #fff;
         }
-
         .courseInput {
             border: 0;
             padding: 2px;
