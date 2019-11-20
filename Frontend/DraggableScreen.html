@@ -20,7 +20,8 @@ Course:<label>
 </label><br>
 -->
 <p>Click and hold the mouse button down to move courses. </p>
-<button onclick="addCourse()">Add course</button>
+<button onclick="addCourse()" id="courseButton">Add course</button>
+<button onclick="window.open('SchedulingPage.html')" id = "backbutton">Back</button>
 
 <div id="courses">
 
@@ -28,10 +29,11 @@ Course:<label>
         <style>
         body{
             margin: 0;
-            padding: 0;
-            background: url(pic1.jpg);
-            background-size: cover;
-            background-position: center
+            padding: 10;
+            background: url(classroom.png);
+            background-size: 100%;
+            width: 100%;
+            height: 100%;
 
         }   
         .mydiv {
@@ -63,18 +65,58 @@ Course:<label>
             font-weight: bold;
             color: white;
             font-size: 42px;
+            padding-left: 165px;
         }
         p1{
             font-weight: bold;
             color: white;
             font-size: 28px;
+            padding-left: 165px;
         }
         p{
             font-weight: bold;
             color: white;
             font-size: 24px;
+            padding-left: 165px;
         }
+        #backbutton{
+             position:absolute;
+             top: 25%;
+             left: 18%;
+        }
+            #courseButton{
+             position:absolute;
+             top: 25%;
+             left: 11%;
+            }
+        .sidenav {
+            height: 100%; 
+            width: 160px; 
+            position: fixed; 
+            top: 0; 
+            background-color: #111; 
+            padding-top: 20px;
+        }
+            .sidenav a {
+            padding: 1px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            }
+            .sidenav a:hover {
+            color: white;
+            }
+        
     </style>
+    
+<div class="sidenav">
+  <a href="#" onclick="window.open('SchedulingPage.html')">Main Menu</a>
+  <a href="#">View Schedule</a>
+  <a href="#">Explore Courses</a>
+  <a href="#">Edit Grad Plan</a>
+  <a href="#" onclick="window.open('CySchedulerHTML.html')">Sign Out</a>
+</div>
 
 </body>
 </html>
