@@ -19,7 +19,7 @@ Course:<label>
 </label><br>
 -->
 <p>Click and hold the mouse button down to move courses. </p>
-<button onclick="addCourse()">Add course</button>
+<button onclick="addCourse()" id="courseButton">Add course</button>
 <button onclick="window.open('SchedulingPage.html')" id = "backbutton">Back</button>
 
 <div id="courses">
@@ -78,8 +78,15 @@ Course:<label>
             font-size: 24px;
             padding-left: 165px;
         }
-            #backbutton{
-                padding-left: 195px;
+        #backbutton{
+             position:absolute;
+             top: 25%;
+             left: 18%;
+        }
+            #courseButton{
+             position:absolute;
+             top: 25%;
+             left: 11%;
             }
         .sidenav {
             height: 100%; 
@@ -103,7 +110,7 @@ Course:<label>
     </style>
     
 <div class="sidenav">
-  <a href="#" onclick="window.open('SchedulingPage')">Main Menu</a>
+  <a href="#" onclick="window.open('SchedulingPage.html')">Main Menu</a>
   <a href="#">View Schedule</a>
   <a href="#">Explore Courses</a>
   <a href="#">Edit Grad Plan</a>
