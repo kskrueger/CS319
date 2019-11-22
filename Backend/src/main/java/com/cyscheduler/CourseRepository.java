@@ -12,4 +12,5 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
     //Collection<Course> findByUcid(@Param("ucid") Integer ucid);
     Set<Course> findAll();
     Set<Course> findByCourseInput(@Param("courseInput") String courseInput);
+    Set<Course> findByDept(@Param("dept") String dept);
 }
