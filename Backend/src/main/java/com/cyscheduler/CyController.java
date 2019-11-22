@@ -56,6 +56,13 @@ public class CyController {
     }
 
     @CrossOrigin
+    @GetMapping("/courses/{dept}")
+    public String getDeptCourses(@PathVariable String dept) {
+        System.out.println("COURSE: "+dept);
+        return new Gson().toJson(courseRepository.findByDept(dept.toUpperCase()));
+    }
+
+    @CrossOrigin
     @PostMapping("/updateTheDb")
     public String udpateDb(@RequestBody String password) {
         if (!password.equals("Mitra309")) {
