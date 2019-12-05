@@ -54,7 +54,7 @@ public class CyController {
     }
 
     @CrossOrigin
-    @GetMapping("/plan/{planName}")
+    @GetMapping("/plan/name/{planName}")
     public Plan getPlanName(@PathVariable String planName) {
         return planRepository.findByName(planName);
     }
