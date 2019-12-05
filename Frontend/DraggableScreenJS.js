@@ -1,6 +1,7 @@
 let gridX = 160;
 let gridY = 160;
 let courseNodes = [];
+let nodePos = [];
 
 function addCourse() {
     let numDivs = document.getElementById('courses').getElementsByTagName('div').length;
@@ -13,13 +14,20 @@ function addCourse() {
         "   <label id=credits"+numDivs+">Credits: </label><br>\n" +
         "   <label id=preReqs"+numDivs+">PreReqs: </label>\n" +
         "</div>";
-    courseNodes.push(['div-'+numDivs]);
+    courseNodes[numDivs] = {};
     document.getElementById('courses').appendChild(course);
     $(course).draggable({
         grid: [gridX, gridY],
         obstacle: ".notHere",
         preventCollision: true,
         containment: "#moveInHere",
+        stop: function() {
+            let offset = $(this).offset();
+            let xPos = offset.left;
+            let yPos = offset.top;
+            nodePos[numDivs]["xPos"] = xPos;
+            nodePos[numDivs]["yPos"] = yPos;
+        }
     });
 }
 
@@ -28,7 +36,7 @@ function getCourse(nodeNum) {
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
     let b = JSON.parse(a);
     if (b.hasOwnProperty("courseNumber")) {
-        courseNodes[nodeNum] = b;
+        courseNodes[nodeNum]["course"] = b;
     } else {
         alert("Course not found! Sorry")
     }
@@ -43,7 +51,7 @@ function updateCredits() {
     let sum = 0;
     for (const key in courseNodes) {
         if (courseNodes[key].hasOwnProperty("credits")) {
-            sum += parseInt(courseNodes[key].credits);
+            sum += parseInt(courseNodes[key].course.credits);
         }
     }
     document.getElementById('creditsTotal').innerText = "Total Credits: "+sum;
