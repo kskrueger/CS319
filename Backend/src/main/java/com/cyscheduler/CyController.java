@@ -5,9 +5,6 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
@@ -16,10 +13,13 @@ public class CyController {
     private UserRepository userRepository;
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private PlanRepository planRepository;
 
-    public CyController(UserRepository ur, CourseRepository cr) {
+    public CyController(UserRepository ur, CourseRepository cr, PlanRepository pr) {
         userRepository = ur;
         courseRepository = cr;
+        planRepository = pr;
     }
 
     @CrossOrigin
@@ -39,6 +39,31 @@ public class CyController {
     public String postUser(@RequestBody User user) {
         userRepository.save(user);
         return String.format("Saving a new user #%s: %s", user.getUuid(), user.toString());
+    }
+
+    @CrossOrigin
+    @GetMapping("/plan/user/{userId}")
+    public String getUserPlans(@PathVariable Integer userId) {
+        return new Gson().toJson(planRepository.findByUuid(userId).toArray());
+    }
+
+    @CrossOrigin
+    @GetMapping("/plan/{planId}")
+    public Plan getPlan(@PathVariable Integer planId) {
+        return planRepository.findByUpid(planId);
+    }
+
+    @CrossOrigin
+    @GetMapping("/plan/{planName}")
+    public Plan getPlanName(@PathVariable String planName) {
+        return planRepository.findByName(planName);
+    }
+
+    @CrossOrigin
+    @PostMapping("/plan")
+    public String postPlan(@RequestBody Plan plan) {
+        planRepository.save(plan);
+        return String.format("Saving a new plan #%s: %s", plan.getUpid(), plan.getName());
     }
 
     @CrossOrigin
