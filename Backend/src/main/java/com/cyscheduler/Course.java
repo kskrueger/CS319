@@ -3,11 +3,9 @@ package com.cyscheduler;
 import com.cyscheduler.util.PreReqParsing;
 import com.cyscheduler.util.Website;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +21,8 @@ public class Course {
     private ArrayList<ArrayList<String>> prereqs = new ArrayList<ArrayList<String>>();
     private String fullName, courseNumber, realName, dept, number, semesterString, credits, description;
     private Boolean availFall, availSpring;
+    private int x;
+    private int y;
 
     Course() {
 
@@ -148,5 +148,21 @@ public class Course {
     private ArrayList<ArrayList<String>> getPrereqsArrayList (String input) {
         PreReqParsing preReqParsing = new PreReqParsing();
         return preReqParsing.parse(input);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
