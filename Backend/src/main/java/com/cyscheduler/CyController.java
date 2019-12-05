@@ -60,6 +60,12 @@ public class CyController {
     }
 
     @CrossOrigin
+    @GetMapping("/plans")
+    public String getPlans() {
+        return new Gson().toJson(planRepository.findAll().toArray());
+    }
+
+    @CrossOrigin
     @PostMapping("/plan")
     public String postPlan(@RequestBody Plan plan) {
         planRepository.save(plan);
