@@ -67,7 +67,10 @@ function Get(yourUrl){
     return httpSite.responseText;
 }
 
-Function Post(yourURL, courseNames){
+/**
+ * @return {string}
+ */
+function Post(yourURL, courseNames){
     var String = "";
     for(var i = 0; i < courseNames.length - 1; i++){
         String += courseNames[i] + ' , ';
