@@ -66,8 +66,20 @@ function Get(yourUrl){
     httpSite.send(null);
     return httpSite.responseText;
 }
+
+Function Post(yourURL, courseNames){
+    var String = "";
+    for(var i = 0; i < courseNames.length - 1; i++){
+        String += courseNames[i] + ' , ';
+    }
+    String += courseNames[courseNames.length];
+    var httpSite = new XMLHttpRequest(); // a new request
+    httpSite.open("POST",yourUrl,false);
+    httpSite.send(JSON.stringify(String));
+    return httpSite.responseText;
+}
 function saveSchedule(courseNames){
-    
+    //Post()
     
     
     alert("Schedule Saved!")
