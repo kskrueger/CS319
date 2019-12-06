@@ -67,5 +67,9 @@ function Get(yourUrl){
     return httpSite.responseText;
 }
 function saveSchedule(courseNames){
+    
+    
+    
+    alert("Schedule Saved!")
     //Function to save to the User object once implemented
 }
