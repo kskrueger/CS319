@@ -1,6 +1,7 @@
 let gridX = 160;
 let gridY = 160;
 let courseNodes = [];
+let courseNames = [];
 
 function addCourse() {
     let numDivs = document.getElementById('courses').getElementsByTagName('div').length;
@@ -31,6 +32,7 @@ function addCourse() {
 }
 
 function getCourse(nodeNum) {
+    let i = 0;
     let name = document.getElementById('courseInput'+nodeNum).value;
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
     let b = JSON.parse(a);
@@ -40,6 +42,8 @@ function getCourse(nodeNum) {
         alert("Course not found! Sorry")
     }
     updateCredits();
+    courseNames[i] = b;
+    i++;
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
     document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
@@ -61,4 +65,7 @@ function Get(yourUrl){
     httpSite.open("GET",yourUrl,false);
     httpSite.send(null);
     return httpSite.responseText;
+}
+function saveSchedule(courseNames){
+    //Function to save to the User object once implemented
 }
