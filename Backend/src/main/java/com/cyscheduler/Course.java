@@ -22,8 +22,8 @@ public class Course {
     private ArrayList<ArrayList<String>> prereqs = new ArrayList<ArrayList<String>>();
     private String fullName, courseNumber, realName, dept, number, semesterString, credits, description;
     private Boolean availFall, availSpring;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
     public Course() {
 
@@ -71,19 +71,19 @@ public class Course {
         return availFall;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
