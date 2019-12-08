@@ -36,7 +36,7 @@ function getCourse(nodeNum) {
     let name = document.getElementById('courseInput'+nodeNum).value;
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
     let b = JSON.parse(a);
-    if (b.hasOwnProperty("courseNumber")) {
+    if (b.hasOwnProperty("courseInput")) {
         courseNodes[nodeNum] = b;
     } else {
         alert("Course not found! Sorry")
@@ -70,21 +70,29 @@ function Get(yourUrl){
 /**
  * @return {string}
  */
-function Post(yourURL, courseNames){
-    var String = "";
-    for(var i = 0; i < courseNames.length - 1; i++){
-        String += courseNames[i] + ' , ';
+function Post(){
+    let out = [];
+    for (let course0 in courseNodes) {
+        let course1 = courseNodes[course0];
+        if (course1.hasOwnProperty("courseInput"))
+        out.push([course1.courseInput.toString(), (course1.x).toString(), (course1.y).toString()]);
     }
-    String += courseNames[courseNames.length];
-    var httpSite = new XMLHttpRequest(); // a new request
-    httpSite.open("POST",yourUrl,false);
-    httpSite.send(JSON.stringify(String));
-    return httpSite.responseText;
+    let send = {};
+    send["name"] = "TESTING PLAN NAME";
+    //send["semesterCourses"] = out;
+    send["semestersCourses"] = out;
+
+    const xhr = new XMLHttpRequest();
+    const url = "http://coms-319-078.cs.iastate.edu:8080/plan"; //HERE
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    let strSend = JSON.stringify(send);
+    xhr.send(strSend);
+    return xhr.responseText;
 }
 function saveSchedule(courseNames){
-    //Post()
-    
-    
+    Post();
+
     alert("Schedule Saved!")
     //Function to save to the User object once implemented
 }
