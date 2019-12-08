@@ -12,28 +12,29 @@ import java.util.Objects;
 @Table(name = "courses")
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer ucid;
+
     private String courseInput;
     private String url;
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Integer ucid;
     @JsonIgnore
     private transient Website website;
     private ArrayList<ArrayList<String>> prereqs = new ArrayList<ArrayList<String>>();
     private String fullName, courseNumber, realName, dept, number, semesterString, credits, description;
     private Boolean availFall, availSpring;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
-    Course() {
+    public Course() {
 
     }
 
     @Override
     public String toString() {
-        return String.format("id: %d, username: %s", courseNumber, fullName);
+        return String.format("id: %s, username: %s", courseNumber, fullName);
     }
 
-    public Course(String courseNumber) {
+    void fillCourse(String courseNumber) {
         courseInput = courseNumber;
         this.url = "http://catalog.iastate.edu/search/?P="+courseNumber.replace(" ", "%20");
         this.website = new Website(url);
@@ -50,6 +51,14 @@ public class Course {
         this.availSpring = availableSpring();
     }
 
+/*    public Integer getUcid() {
+        return ucid;
+    }
+
+    public void setUcid(Integer ucid) {
+        this.ucid = ucid;
+    }*/
+
     public ArrayList<ArrayList<String>> getPrereqs() {
         return prereqs;
     }
@@ -62,6 +71,22 @@ public class Course {
         return availFall;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     enum Semester {SPRING, FALL, BOTH, UNKNOWN}
 
     public String getUrl() {
@@ -72,16 +97,16 @@ public class Course {
         return getCourseNumber().equals(courseInput);
     }
 
-    public String getCourseNumber() {
+    String getCourseNumber() {
         int colonPosition = getFullName().indexOf(":");
         return getFullName().substring(0,colonPosition);
     }
 
-    public String getFullName() {
+    private String getFullName() {
         return website.getText("#fssearchresults > div:nth-child(1) > h2");
     }
 
-    public String getRealName() {
+    private String getRealName() {
         int colonPosition = getFullName().indexOf(":");
         if ((colonPosition+2) > 0) {
             return getFullName().substring(colonPosition+2);
@@ -90,17 +115,17 @@ public class Course {
         }
     }
 
-    public String getDept() {
+    private String getDept() {
         int colonPosition = getFullName().indexOf(":");
         return getFullName().substring(0,colonPosition-4);
     }
 
-    public String getNumber() {
+    private String getNumber() {
         int colonPosition = getFullName().indexOf(":");
         return getFullName().substring(colonPosition-3,colonPosition);
     }
 
-    public String getPrereqsRaw() {
+    private String getPrereqsRaw() {
         String str = website.getText("#fssearchresults > div:nth-child(1) > div > div > p.prereq > em");
         if (Objects.equals(str, "")) {
             return "";
@@ -111,7 +136,7 @@ public class Course {
         return str;
     }
 
-    public String getDescription() {
+    private String getDescription() {
         String str = website.getText("#fssearchresults > div:nth-child(1) > div > div > p.prereq");
         int startPos = str.indexOf(".")+2;
         return str.substring(startPos);
@@ -150,19 +175,59 @@ public class Course {
         return preReqParsing.parse(input);
     }
 
-    public int getX() {
-        return x;
+    public String getCourseInput() {
+        return courseInput;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setCourseInput(String courseInput) {
+        this.courseInput = courseInput;
     }
 
-    public int getY() {
-        return y;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setPrereqs(ArrayList<ArrayList<String>> prereqs) {
+        this.prereqs = prereqs;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setCourseNumber(String courseNumber) {
+        this.courseNumber = courseNumber;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setSemesterString(String semesterString) {
+        this.semesterString = semesterString;
+    }
+
+    public void setCredits(String credits) {
+        this.credits = credits;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAvailFall(Boolean availFall) {
+        this.availFall = availFall;
+    }
+
+    public void setAvailSpring(Boolean availSpring) {
+        this.availSpring = availSpring;
     }
 }
