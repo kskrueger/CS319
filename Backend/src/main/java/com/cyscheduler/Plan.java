@@ -1,19 +1,32 @@
 package com.cyscheduler;
 
+import com.google.gson.Gson;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "plans")
 public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer upid;
+    public Integer upid;
     private String name;
     private Integer uuid;
-    private ArrayList<ArrayList<Course>> semestersCourses = new ArrayList<>();
+    //@Column
+    //@ElementCollection(targetClass=CourseNode.class)
+    //@OneToMany
+    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "uaid")
+    private ArrayList<ArrayList<String>> semestersCourses = new ArrayList<>();
+    //private Course semestersCourses;// = new ArrayList<>();
 
-    public Integer getUpid() {
+    public Plan() {
+
+    }
+
+    Integer getUpid() {
         return upid;
     }
 
@@ -21,7 +34,7 @@ public class Plan {
         this.upid = upid;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -37,11 +50,11 @@ public class Plan {
         this.uuid = uuid;
     }
 
-    public ArrayList<ArrayList<Course>> getSemestersCourses() {
+    public ArrayList<ArrayList<String>> getSemestersCourses() {
         return semestersCourses;
     }
 
-    public void setSemestersCourses(ArrayList<ArrayList<Course>> semestersCourses) {
+    public void setSemestersCourses(ArrayList<ArrayList<String>> semestersCourses) {
         this.semestersCourses = semestersCourses;
     }
 }
