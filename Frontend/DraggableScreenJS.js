@@ -124,3 +124,14 @@ function saveSchedule(){
     alert("Schedule "+name+" Saved!")
     //Function to save to the User object once implemented
 }
+
+function loadSchedule(){
+    const name = document.getElementById("courseName");
+    let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/name/' + name.value);
+    let b = JSON.parse(a);
+    var value = document.getElementById("h3");
+    for(let x in b.semestersCourses){
+        value.textContent += b.semestersCourses[x][0].toUpperCase() + " ";
+    }
+
+}
