@@ -2,51 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Draggable Courses</title>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type = "text/javascript" src="DraggableScreenJS.js"></script>
 </head>
 <body>
 
-<h1>Grad Plan</h1>
+<h1>Grad Plan Editor</h1>
+<p1>Current Semester:
+    <label><input type='text' name='courseName'></label>
+    <label id="creditsTotal">Total Credits: </label>
+</p1><br>
+<p2>Enter Schedule Name:
+    <label><input type='text' name='courseName' id="courseName"></label>
+</p2>
+<!--
+Course:<label>
+    <input type='text' name='courseName'>
+</label><br>
+-->
+<p>Click and hold the mouse button down to move courses. </p>
+<button onclick="addCourse()" id="courseButton">Add course</button>
+<button onclick="saveSchedule()" id = "savebutton">Save Schedule</button>
+<button onclick="saveSchedule()" id = "Loadbutton">Load Schedule</button>
+<button onclick="window.open('SchedulingPage.html')" id="backbutton">Back</button>
 <br>
-<p1>Future Semesters:
-</p1>
-    <br>   
-    
-    
-    
-<script>   
-let courseNodes = [];
-var i = 0;
-function getCourse() {
-    const name = document.getElementById("courseName");
-    let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name.value);
-    let b = JSON.parse(a);
-    if (b.hasOwnProperty("courseNumber")) {
-        courseNodes[i] = b;
-        i++;
-    } else {
-        alert("Course not found")
-    }
-    onload(b);
-}
-    
-function Get(yourUrl){
-    var httpSite = new XMLHttpRequest(); // a new request
-    httpSite.open("GET",yourUrl,false);
-    httpSite.send(null);
-    return httpSite.responseText;
-}
-    
-function onload(name){
-    document.getElementById("whitebox").style.visibility = "visible";
-    document.getElementById("h3").innerHTML = "Course: " + name.fullName;
-    document.getElementById("h4").innerHTML = "Description: " + name.description;
-}
-</script>
-
 <div id="courses" class="shift"></div>
-        <style>
+<style>
         body{
             margin: 0;
             padding: 10px;
@@ -56,6 +39,28 @@ function onload(name){
             height: 100%;
 
         }
+        .shift {
+            padding-left: 165px;
+            padding-top: 100px;
+        }
+        .mydiv {
+            position: absolute;
+            left: 0px;
+            top: -50px;
+            z-index: 9;
+            background-color: #f1f1f1;
+            text-align: center;
+            width: 150px;
+            height: 150px;
+            border: 2px solid #d3d3d3;
+        }
+        .mydivheader {
+            padding: 5px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196F3;
+            color: #fff;
+        }
         .courseInput {
             border: 0;
             padding: 2px;
@@ -63,58 +68,56 @@ function onload(name){
             font: 12pt sans-serif;
             width: 100px;
         }
-        .white-box {
-            background-color: white;
-            color: black;
-            width: 900px;
-            height: 400px;
-            position: absolute;
-            left: 11.5%;
-            top: 19%;
-            visibility: hidden;
-
-            }    
         h1{
-            position: absolute;
+            position: relative;
             font-weight: bold;
             color: white;
             font-size: 42px;
             padding-left: 165px;
             margin-top: -10px;
         }
-            h3{
-            font-size: 22px;
-            margin-top: 0px;  
-                
-            }
-            h4{
-            font-size: 22px;
-            margin-top: -20px;  
-            }
         p1{
-            position: absolute;
+            position: relative;
             font-weight: bold;
             color: white;
             font-size: 28px;
             padding-left: 165px;
-            top: 7%;
-
         }
-            #myDropdown{
-            position:absolute;
-             top: 21.75%;
-             left: 18.5%;
-            }
+        p2{
+            position: absolute;
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+            padding-left: 165px; 
+        }
+        p{
+            position: relative;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+            padding-left: 165px;
+            padding-top: 13px;
+        }
         #backbutton{
              position:absolute;
              top: 21.75%;
              left: 18.5%;
         }
-            #searchbar{
-               position:absolute;
-             top: 15.75%;
-             left: 11%; 
+            #courseButton{
+             position:absolute;
+             top: 21.75%;
+             left: 12%;
             }
+            #savebutton{
+            position:absolute;
+             top: 15.2%;
+             left: 38%; 
+            }
+    #Loadbutton{
+        position:absolute;
+             top: 15.2%;
+             left: 46%; 
+    }
         .sidenav {
             height: 100%; 
             width: 160px; 
@@ -134,20 +137,22 @@ function onload(name){
             .sidenav a:hover {
             color: white;
             }
+        .courseInput {
+            border: 0;
+            padding: 2px;
+            background: #fff;
+            font: 12pt sans-serif;
+            width: 100px;
+        }
 
     </style>
     
 <div class="sidenav">
   <a href="SchedulingPage.html" target="_self">Main Menu</a>
-  <a href="DraggableScreen.html" target="_self">Create Schedule</a>
   <a href="ViewSchedule.HTML" target="_self">View Schedule</a>
   <a href="ExploreCourses.html" target="_self">Explore Courses</a>
+  <a href="GradPlan.html" target="_self">View Grad Plan</a>
   <a href="CySchedulerHTML.html" target="_self">Sign Out</a>
-</div>
-    
-<div class="white-box" id="whitebox">
-    <h3 id="h3">Course: </h3>
-    <h4 id ="h4">Description: </h4>
 </div>
 
 </body>

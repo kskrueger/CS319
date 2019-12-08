@@ -53,11 +53,9 @@ function loadSchedule(){
     let b = JSON.parse(a);
     var value = document.getElementById("h3");
     for(let x in b.semestersCourses){
-        value.textContent += b.semestersCourses[x][0].toUpperCase;
+        value.textContent += b.semestersCourses[x][0].toUpperCase() + " ";
     }
 
-    if (b[i].hasOwnProperty("semestersCourses"))
-        b[i][j][0].toString();
 }
 </script>
 
