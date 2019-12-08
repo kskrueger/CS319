@@ -22,8 +22,6 @@ public class Course {
     private ArrayList<ArrayList<String>> prereqs = new ArrayList<ArrayList<String>>();
     private String fullName, courseNumber, realName, dept, number, semesterString, credits, description;
     private Boolean availFall, availSpring;
-    private double x;
-    private double y;
 
     public Course() {
 
@@ -69,22 +67,6 @@ public class Course {
 
     public Boolean getAvailFall() {
         return availFall;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     enum Semester {SPRING, FALL, BOTH, UNKNOWN}
