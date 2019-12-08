@@ -17,9 +17,7 @@
   <button onclick="loadSchedule()" id="courseButton">Search</button>  
     <br>  
     <br>   
-    
-    
-    
+
 <script>  
 let courseNodes = [];
 var i = 0;
@@ -53,10 +51,16 @@ function loadSchedule(){
     const name = document.getElementById("courseName");
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/name/' + name.value);
     let b = JSON.parse(a);
+<<<<<<< HEAD
     var value = document.getElementById("h3");
     for(let x in b.semestersCourses){
         value.textContent += b.semestersCourses[x][0].toUpperCase;
     }
+=======
+
+    if (b[i].hasOwnProperty("semestersCourses"))
+        b[i][j][0].toString();
+>>>>>>> f7451b11233c05059ef6b5e5a179032db2567159
 }
 </script>
 
