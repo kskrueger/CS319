@@ -16,20 +16,16 @@ function addCourse() {
         "   <label id=preReqs"+numDivs+">PreReqs: </label>\n" +
         "</div>";
     courseNodes[numDivs] = {};
-    let x = -gridX;
+    let x = 0;
     let y = -50;
-    let localMaxX = 0;
+    let localMaxX = -gridX;
     for (let num in courseNodes) {
         let course = courseNodes[num];
-        if (course.hasOwnProperty('x') && course.x > localMaxX) {
+        if (course.hasOwnProperty('x') && course.y === y && course.x > localMaxX) {
             localMaxX = course.x;
         }
     }
     x = x + localMaxX + gridX;
-    if (courseNodes[numDivs].hasOwnProperty('x')) {
-        x = courseNodes[numDivs].x;
-        y = courseNodes[numDivs].y;
-    }
     document.getElementById('courses').appendChild(course);
     document.getElementById('course'+numDivs).style.left = x+'px';
     document.getElementById('course'+numDivs).style.top = y+'px';
@@ -65,14 +61,20 @@ function getCourse(nodeNum) {
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
     document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
-    /*let x = 0;
+    let x = 0;
     let y = -50;
-    /!*if (b.hasOwnProperty('y') && y !== 0) {
-        x = b.x;
-        y = b.y;
-    }*!/
+    let localMaxX = -gridX;
+    for (let num in courseNodes) {
+        let course = courseNodes[num];
+        if (course.hasOwnProperty('x') && course.y === y && course.x > localMaxX) {
+            localMaxX = course.x;
+        }
+    }
+    x = x + localMaxX + gridX;
     document.getElementById('course'+nodeNum).style.left = x+'px';
-    document.getElementById('course'+nodeNum).style.top = y+'px';*/
+    courseNodes[nodeNum].x = x;
+    document.getElementById('course'+nodeNum).style.top = y+'px';
+    courseNodes[nodeNum].y = y;
     return b;
 }
 
