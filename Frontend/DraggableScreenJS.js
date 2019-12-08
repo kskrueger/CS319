@@ -1,4 +1,5 @@
 let gridX = 160;
+let maxX = 1000;
 let gridY = 160;
 let courseNodes = [];
 let courseNames = [];
@@ -15,7 +16,24 @@ function addCourse() {
         "   <label id=preReqs"+numDivs+">PreReqs: </label>\n" +
         "</div>";
     courseNodes[numDivs] = {};
+    let x = -gridX;
+    let y = -50;
+    let localMaxX = 0;
+    for (let num in courseNodes) {
+        let course = courseNodes[num];
+        if (course.hasOwnProperty('x') && course.x > localMaxX) {
+            localMaxX = course.x;
+        }
+    }
+    x = x + localMaxX + gridX;
+    if (courseNodes[numDivs].hasOwnProperty('x')) {
+        x = courseNodes[numDivs].x;
+        y = courseNodes[numDivs].y;
+    }
     document.getElementById('courses').appendChild(course);
+    document.getElementById('course'+numDivs).style.left = x+'px';
+    document.getElementById('course'+numDivs).style.top = y+'px';
+    let start = true;
     $(course).draggable({
         grid: [gridX, gridY],
         obstacle: ".notHere",
@@ -47,6 +65,14 @@ function getCourse(nodeNum) {
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
     document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
+    /*let x = 0;
+    let y = -50;
+    /!*if (b.hasOwnProperty('y') && y !== 0) {
+        x = b.x;
+        y = b.y;
+    }*!/
+    document.getElementById('course'+nodeNum).style.left = x+'px';
+    document.getElementById('course'+nodeNum).style.top = y+'px';*/
     return b;
 }
 
@@ -78,7 +104,7 @@ function Post(){
         out.push([course1.courseInput.toString(), (course1.x).toString(), (course1.y).toString()]);
     }
     let send = {};
-    send["name"] = "TESTING PLAN NAME";
+    send["name"] = document.getElementById('courseName').value.toString();
     //send["semesterCourses"] = out;
     send["semestersCourses"] = out;
 
@@ -88,11 +114,11 @@ function Post(){
     xhr.setRequestHeader("Content-Type", "application/json");
     let strSend = JSON.stringify(send);
     xhr.send(strSend);
-    return xhr.responseText;
+    return send["name"];
 }
-function saveSchedule(courseNames){
-    Post();
+function saveSchedule(){
+    let name = Post();
 
-    alert("Schedule Saved!")
+    alert("Schedule "+name+" Saved!")
     //Function to save to the User object once implemented
 }
