@@ -14,6 +14,9 @@
     <label><input type='text' name='courseName'></label>
     <label id="creditsTotal">Total Credits: </label>
 </p1><br>
+<p2>Enter Schedule Name:
+    <label><input type='text' name='courseName' id="courseName"></label>
+</p2>
 <!--
 Course:<label>
     <input type='text' name='courseName'>
@@ -77,12 +80,20 @@ Course:<label>
             font-size: 28px;
             padding-left: 165px;
         }
-        p{
+        p2{
             position: absolute;
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+            padding-left: 165px; 
+        }
+        p{
+            position: relative;
             font-weight: bold;
             color: white;
             font-size: 18px;
             padding-left: 165px;
+            padding-top: 13px;
         }
         #backbutton{
              position:absolute;
@@ -96,8 +107,8 @@ Course:<label>
             }
             #savebutton{
             position:absolute;
-             top: 90.5%;
-             left: 12%; 
+             top: 15.2%;
+             left: 38%; 
             }
         .sidenav {
             height: 100%; 
@@ -118,6 +129,13 @@ Course:<label>
             .sidenav a:hover {
             color: white;
             }
+        .courseInput {
+            border: 0;
+            padding: 2px;
+            background: #fff;
+            font: 12pt sans-serif;
+            width: 100px;
+        }
 
     </style>
     
