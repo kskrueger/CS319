@@ -78,7 +78,7 @@ function Post(){
         out.push([course1.courseInput.toString(), (course1.x).toString(), (course1.y).toString()]);
     }
     let send = {};
-    send["name"] = "TESTING PLAN NAME";
+    send["name"] = document.getElementById('courseName').value.toString();
     //send["semesterCourses"] = out;
     send["semestersCourses"] = out;
 
@@ -88,11 +88,11 @@ function Post(){
     xhr.setRequestHeader("Content-Type", "application/json");
     let strSend = JSON.stringify(send);
     xhr.send(strSend);
-    return xhr.responseText;
+    return send["name"];
 }
-function saveSchedule(courseNames){
-    Post();
+function saveSchedule(){
+    let name = Post();
 
-    alert("Schedule Saved!")
+    alert("Schedule "+name+" Saved!")
     //Function to save to the User object once implemented
 }
