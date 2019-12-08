@@ -68,15 +68,17 @@ public class CyController {
     @CrossOrigin
     @PostMapping("/plan")
     public String postPlan(@RequestBody Plan plan) {
+        System.out.println(plan.getName());
         planRepository.save(plan);
-        return String.format("Saving a new plan #%s: %s", plan.getUpid(), plan.getName());
+        return String.format("Saving a new plan #%d: %s", plan.getUpid(), plan.getName());
     }
 
     @CrossOrigin
     @GetMapping("/course/{courseId}")
     public Course getCourse(@PathVariable String courseId) {
         System.out.print("COURSE: "+courseId);
-        Course course = new Course(courseId);
+        Course course = new Course();
+        course.fillCourse(courseId);
         return course;
     }
 
@@ -103,7 +105,8 @@ public class CyController {
         for (String courseName : allCourses) {
             courseName = courseName.replaceAll("[^A-Za-z0-9 ]", "");
             try {
-                Course course = new Course(courseName);
+                Course course = new Course();
+                course.fillCourse(courseName);
                 courseRepository.save(course);
                 System.out.println("Saved: "+course.getCourseNumber());
             } catch (Exception e) {
