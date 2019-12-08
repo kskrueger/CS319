@@ -15,20 +15,22 @@ function addCourse() {
         "   <label id=credits"+numDivs+">Credits: </label><br>\n" +
         "   <label id=preReqs"+numDivs+">PreReqs: </label>\n" +
         "</div>";
-    courseNodes[numDivs] = {};
     let x = 0;
     let y = -50;
     let localMaxX = -gridX;
     for (let num in courseNodes) {
-        let course = courseNodes[num];
-        if (course.hasOwnProperty('x') && course.y === y && course.x > localMaxX) {
-            localMaxX = course.x;
+        let course0 = courseNodes[num];
+        if (course0.hasOwnProperty('x') && course0.y === y && course0.x > localMaxX) {
+            localMaxX = course0.x;
         }
     }
-    x = x + localMaxX + gridX;
+    x = localMaxX + gridX;
     document.getElementById('courses').appendChild(course);
     document.getElementById('course'+numDivs).style.left = x+'px';
     document.getElementById('course'+numDivs).style.top = y+'px';
+    courseNodes[numDivs] = {};
+    courseNodes[numDivs].x = x;
+    courseNodes[numDivs].y = y;
     let start = true;
     $(course).draggable({
         grid: [gridX, gridY],
@@ -61,16 +63,16 @@ function getCourse(nodeNum) {
     document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
     document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
-    let x = 0;
-    let y = -50;
-    let localMaxX = -gridX;
+    courseNodes[nodeNum].x = parseInt(document.getElementById('course'+nodeNum).style.left);
+    courseNodes[nodeNum].y = parseInt(document.getElementById('course'+nodeNum).style.top);
+    let x = courseNodes[nodeNum].x;
+    let y = courseNodes[nodeNum].y;
     for (let num in courseNodes) {
-        let course = courseNodes[num];
-        if (course.hasOwnProperty('x') && course.y === y && course.x > localMaxX) {
-            localMaxX = course.x;
+        let course0 = courseNodes[num];
+        if (y === course0.y && x === course0.x && num !== nodeNum) {
+            x = course0.x + gridX;
         }
     }
-    x = x + localMaxX + gridX;
     document.getElementById('course'+nodeNum).style.left = x+'px';
     courseNodes[nodeNum].x = x;
     document.getElementById('course'+nodeNum).style.top = y+'px';
