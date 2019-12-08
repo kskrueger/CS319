@@ -9,7 +9,8 @@
 
 <h1>Next Semester Schedule</h1>
 <br>
-<p1>Current Plan:
+<p1>Enter the schedule name you would like to view:
+    <label><input type='text' name='courseName' id="courseName"></label>
 </p1>
     <br>   
     
@@ -46,15 +47,8 @@ function onload(name){
     
 function loadSchedule(){
     const name = document.getElementById("courseName");
-    let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/1');
+    let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/' + name.value;
     let b = JSON.parse(a);
-    if (b.hasOwnProperty("courseNumber")) {
-        courseNodes[i] = b;
-        i++;
-    } else {
-        alert("Course not found")
-    }
-    onload(b);
 }
 </script>
 
