@@ -43,6 +43,19 @@ function onload(name){
     document.getElementById("h3").innerHTML = "Course: " + name.fullName;
     document.getElementById("h4").innerHTML = "Description: " + name.description;
 }
+    
+function loadSchedule(){
+    const name = document.getElementById("courseName");
+    let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/1');
+    let b = JSON.parse(a);
+    if (b.hasOwnProperty("courseNumber")) {
+        courseNodes[i] = b;
+        i++;
+    } else {
+        alert("Course not found")
+    }
+    onload(b);
+}
 </script>
 
 <div id="courses" class="shift"></div>
