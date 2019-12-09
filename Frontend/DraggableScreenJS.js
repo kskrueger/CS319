@@ -18,10 +18,20 @@ function addCourse() {
     let x = 0;
     let y = -50;
     let localMaxX = -gridX;
-    for (let num in courseNodes) {
-        let course0 = courseNodes[num];
-        if (course0.hasOwnProperty('x') && course0.y === y && course0.x > localMaxX) {
-            localMaxX = course0.x;
+    let done = false;
+    while (!done) {
+        for (let num in courseNodes) {
+            let course0 = courseNodes[num];
+            if (course0.hasOwnProperty('x') && course0.y === y && course0.x > localMaxX) {
+                localMaxX = course0.x;
+            }
+        }
+        if (localMaxX > maxX) {
+            localMaxX = -gridX;
+            y += gridY;
+        } else {
+            done = true;
+            break;
         }
     }
     x = localMaxX + gridX;
@@ -65,7 +75,7 @@ function getCourse(nodeNum) {
     document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
     courseNodes[nodeNum].x = parseInt(document.getElementById('course'+nodeNum).style.left);
     courseNodes[nodeNum].y = parseInt(document.getElementById('course'+nodeNum).style.top);
-    let x = courseNodes[nodeNum].x;
+    /*let x = courseNodes[nodeNum].x;
     let y = courseNodes[nodeNum].y;
     for (let num in courseNodes) {
         let course0 = courseNodes[num];
@@ -77,6 +87,7 @@ function getCourse(nodeNum) {
     courseNodes[nodeNum].x = x;
     document.getElementById('course'+nodeNum).style.top = y+'px';
     courseNodes[nodeNum].y = y;
+    */
     return b;
 }
 
