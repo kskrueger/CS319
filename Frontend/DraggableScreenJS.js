@@ -3,17 +3,18 @@ let maxX = 1000;
 let gridY = 160;
 let courseNodes = [];
 let courseNames = [];
+let currentUpid = 0;
 
 function addCourse() {
     let numDivs = document.getElementById('courses').getElementsByTagName('div').length;
     let course = document.createElement("course");
     course.innerHTML =
-        "<div id=course"+numDivs+" class='mydiv'>" +
+        "<div id=course" + numDivs + " class='mydiv'>" +
         "   <div class='mydivheader'>" +
-        "   <input id=courseInput"+numDivs+" class=courseInput width='10px' type='text' placeholder='Course Num' name='courseName' " +
-        "       onKeyDown=\"if(event.keyCode===13) getCourse("+numDivs+")\"></div>\n" +
-        "   <label id=credits"+numDivs+">Credits: </label><br>\n" +
-        "   <label id=preReqs"+numDivs+">PreReqs: </label>\n" +
+        "   <input id=courseInput" + numDivs + " class=courseInput width='10px' type='text' placeholder='Course Num' name='courseName' " +
+        "       onKeyDown=\"if(event.keyCode===13) getCourse(" + numDivs + ")\"></div>\n" +
+        "   <label id=credits" + numDivs + ">Credits: </label><br>\n" +
+        "   <label id=preReqs" + numDivs + ">PreReqs: </label>\n" +
         "</div>";
     let x = 0;
     let y = -50;
@@ -36,8 +37,8 @@ function addCourse() {
     }
     x = localMaxX + gridX;
     document.getElementById('courses').appendChild(course);
-    document.getElementById('course'+numDivs).style.left = x+'px';
-    document.getElementById('course'+numDivs).style.top = y+'px';
+    document.getElementById('course' + numDivs).style.left = x + 'px';
+    document.getElementById('course' + numDivs).style.top = y + 'px';
     courseNodes[numDivs] = {};
     courseNodes[numDivs].x = x;
     courseNodes[numDivs].y = y;
@@ -47,7 +48,7 @@ function addCourse() {
         obstacle: ".notHere",
         preventCollision: true,
         containment: "#moveInHere",
-        stop: function() {
+        stop: function () {
             let offset = $(this).offset();
             let xPos = offset.left;
             let yPos = offset.top;
@@ -55,12 +56,17 @@ function addCourse() {
             courseNodes[numDivs]["y"] = yPos;
         }
     });
+    return numDivs;
 }
 
-function getCourse(nodeNum) {
+function getCourse(nodeNum, courseInput = null) {
     let i = 0;
-    let name = document.getElementById('courseInput'+nodeNum).value;
-    let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/'+name);
+    let name = document.getElementById('courseInput' + nodeNum).value;
+    if (courseInput != null) {
+        document.getElementById('courseInput' + nodeNum).value = courseInput;
+        name = courseInput;
+    }
+    let a = Get('http://coms-319-078.cs.iastate.edu:8080/course/' + name);
     let b = JSON.parse(a);
     if (b.hasOwnProperty("courseInput")) {
         courseNodes[nodeNum] = b;
@@ -70,11 +76,11 @@ function getCourse(nodeNum) {
     updateCredits();
     courseNames[i] = b;
     i++;
-    document.getElementById('credits'+nodeNum).innerText = "Credits: "+b.credits;
-    document.getElementById('preReqs'+nodeNum).innerText = "PreReqs: "+b.prereqs;
-    document.getElementById('preReqs'+nodeNum).style.fontSize = '15px';
-    courseNodes[nodeNum].x = parseInt(document.getElementById('course'+nodeNum).style.left);
-    courseNodes[nodeNum].y = parseInt(document.getElementById('course'+nodeNum).style.top);
+    document.getElementById('credits' + nodeNum).innerText = "Credits: " + b.credits;
+    document.getElementById('preReqs' + nodeNum).innerText = "PreReqs: " + b.prereqs;
+    document.getElementById('preReqs' + nodeNum).style.fontSize = '15px';
+    courseNodes[nodeNum].x = parseInt(document.getElementById('course' + nodeNum).style.left);
+    courseNodes[nodeNum].y = parseInt(document.getElementById('course' + nodeNum).style.top);
     /*let x = courseNodes[nodeNum].x;
     let y = courseNodes[nodeNum].y;
     for (let num in courseNodes) {
@@ -98,12 +104,12 @@ function updateCredits() {
             sum += parseInt(courseNodes[key].credits);
         }
     }
-    document.getElementById('creditsTotal').innerText = "Total Credits: "+sum;
+    document.getElementById('creditsTotal').innerText = "Total Credits: " + sum;
 }
 
-function Get(yourUrl){
+function Get(yourUrl) {
     var httpSite = new XMLHttpRequest(); // a new request
-    httpSite.open("GET",yourUrl,false);
+    httpSite.open("GET", yourUrl, false);
     httpSite.send(null);
     return httpSite.responseText;
 }
@@ -111,16 +117,15 @@ function Get(yourUrl){
 /**
  * @return {string}
  */
-function Post(){
+function Post() {
     let out = [];
     for (let course0 in courseNodes) {
         let course1 = courseNodes[course0];
         if (course1.hasOwnProperty("courseInput"))
-        out.push([course1.courseInput.toString(), (course1.x).toString(), (course1.y).toString()]);
+            out.push([course1.courseInput.toString(), (course1.x).toString(), (course1.y).toString()]);
     }
     let send = {};
     send["name"] = document.getElementById('courseName').value.toString();
-    //send["semesterCourses"] = out;
     send["semestersCourses"] = out;
 
     const xhr = new XMLHttpRequest();
@@ -131,20 +136,24 @@ function Post(){
     xhr.send(strSend);
     return send["name"];
 }
-function saveSchedule(){
-    let name = Post();
 
-    alert("Schedule "+name+" Saved!")
+function saveSchedule() {
+    let name = Post();
+    alert("Schedule " + name + " Saved!")
     //Function to save to the User object once implemented
 }
 
-function loadSchedule(){
+function loadSchedule() {
     const name = document.getElementById("courseName");
     let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/name/' + name.value);
-    let b = JSON.parse(a);
-    var value = document.getElementById("h3");
-    for(let x in b.semestersCourses){
-        value.textContent += b.semestersCourses[x][0].toUpperCase() + " ";
+    b = JSON.parse(a);
+    currentUpid = parseInt(b["upid"]);
+    let courses = b["semestersCourses"];
+    for (let i in courses) {
+        let course = courses[i];
+        let nodeNum = addCourse(course[0]);
+        getCourse(nodeNum, course[0]);
+        document.getElementById('course' + nodeNum).style.left = course[1] + 'px';
+        document.getElementById('course' + nodeNum).style.top = course[2] + 'px';
     }
-
 }
