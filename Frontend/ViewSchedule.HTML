@@ -6,14 +6,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-
-<h1>Current Grad Plan</h1>
 <br>
 <p1>Enter the schedule name you would like to view:
     <label><input type='text' name='courseName' id="courseName"></label>
 </p1>
 <br>
-<h2>Courses Needed to take:</h2>
+<h2>Courses Planned:</h2>
   <button onclick="loadSchedule()" id="courseButton">Search</button>  
     <br>  
     <br>   
@@ -53,7 +51,7 @@ function loadSchedule(){
     let b = JSON.parse(a);
     var value = document.getElementById("h3");
     for(let x in b.semestersCourses){
-        value.textContent += b.semestersCourses[x][0].toUpperCase() + " ";
+        value.innerHTML += b.semestersCourses[x][0].toUpperCase() + "</br>";
     }
 
 }
@@ -166,7 +164,7 @@ function loadSchedule(){
 <div class="sidenav">
   <a href="SchedulingPage.html" target="_self">Main Menu</a>
   <a href="DraggableScreen.html" target="_self">Create Schedule</a>
-  <a href="ViewSchedule.HTML" target="_self">Grad Plan</a>
+  <a href="GradPlan.html" target="_self">Edit Grad Plan</a>
   <a href="ExploreCourses.html" target="_self">Explore Courses</a>
   <a href="CySchedulerHTML.html" target="_self">Sign Out</a>
 </div>
