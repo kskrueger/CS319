@@ -144,9 +144,11 @@ function saveSchedule() {
 }
 
 function loadSchedule() {
-    for (let x in courseNodes) {
-        remove(x);
+    let coursesList = document.getElementById('courses');
+    while (coursesList.hasChildNodes()) {
+        coursesList.removeChild(coursesList.lastChild);
     }
+    courseNodes = [];
     const name = document.getElementById("courseName");
     let url = 'http://coms-319-078.cs.iastate.edu:8080/plan/name/' + name.value
     let a = Get(url);
