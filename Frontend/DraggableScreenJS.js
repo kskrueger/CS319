@@ -13,7 +13,7 @@ function addCourse() {
         "<div id=course" + numDivs + " class='mydiv'>" +
         "   <div class='mydivheader'>" +
         "   <input id=courseInput" + numDivs + " class=courseInput width='10px' type='text' placeholder='Course Num' name='courseName' " +
-        "       onKeyDown=\"if(event.keyCode===13) getCourse(" + numDivs + ")\"></div>\n" +
+        "       onKeyDown=\"if(event.keyCode===13) getCourse(" + numDivs + ")\"><button class=\"btn\"><i class=\"fa fa-close\" onClick=remove(" + numDivs + ")></i></button></div>\n" +
         "   <label id=credits" + numDivs + ">Credits: </label><br>\n" +
         "   <label id=preReqs" + numDivs + ">PreReqs: </label>\n" +
         "</div>";
@@ -82,20 +82,13 @@ function getCourse(nodeNum, courseInput = null) {
     document.getElementById('preReqs' + nodeNum).style.fontSize = '15px';
     courseNodes[nodeNum].x = parseInt(document.getElementById('course' + nodeNum).style.left);
     courseNodes[nodeNum].y = parseInt(document.getElementById('course' + nodeNum).style.top);
-    /*let x = courseNodes[nodeNum].x;
-    let y = courseNodes[nodeNum].y;
-    for (let num in courseNodes) {
-        let course0 = courseNodes[num];
-        if (y === course0.y && x === course0.x && num !== nodeNum) {
-            x = course0.x + gridX;
-        }
-    }
-    document.getElementById('course'+nodeNum).style.left = x+'px';
-    courseNodes[nodeNum].x = x;
-    document.getElementById('course'+nodeNum).style.top = y+'px';
-    courseNodes[nodeNum].y = y;
-    */
     return b;
+}
+
+function remove(nodeNum) {
+    document.getElementById('course' + nodeNum).remove();
+    courseNodes.splice(nodeNum, 1);
+    updateCredits();
 }
 
 function updateCredits() {
@@ -138,6 +131,9 @@ function Post() {
     xhr.setRequestHeader("Content-Type", "application/json");
     let strSend = JSON.stringify(send);
     xhr.send(strSend);
+    let response = xhr.responseText;
+    currentUpid = parseInt(response.substring(response.indexOf("#")+1, response.indexOf(":")));
+    currentName = send["name"];
     return send["name"];
 }
 
@@ -148,12 +144,16 @@ function saveSchedule() {
 }
 
 function loadSchedule() {
+    for (let x in courseNodes) {
+        remove(x);
+    }
     const name = document.getElementById("courseName");
-    let a = Get('http://coms-319-078.cs.iastate.edu:8080/plan/name/' + name.value);
-    b = JSON.parse(a);
+    let url = 'http://coms-319-078.cs.iastate.edu:8080/plan/name/' + name.value
+    let a = Get(url);
+    let b = JSON.parse(a);
     currentUpid = parseInt(b["upid"]);
     let courses = b["semestersCourses"];
-    currentName = b["name"];
+    currentName = name.value;//b["name"];
     for (let i in courses) {
         let course = courses[i];
         let nodeNum = addCourse(course[0]);
