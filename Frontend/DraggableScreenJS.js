@@ -3,7 +3,8 @@ let maxX = 1000;
 let gridY = 160;
 let courseNodes = [];
 let courseNames = [];
-let currentUpid = 0;
+let currentUpid = -1;
+let currentName = "";
 
 function addCourse() {
     let numDivs = document.getElementById('courses').getElementsByTagName('div').length;
@@ -126,6 +127,9 @@ function Post() {
     }
     let send = {};
     send["name"] = document.getElementById('courseName').value.toString();
+    if (send["name"] === currentName && currentUpid !== -1) {
+        send["upid"] = currentUpid;
+    }
     send["semestersCourses"] = out;
 
     const xhr = new XMLHttpRequest();
@@ -149,6 +153,7 @@ function loadSchedule() {
     b = JSON.parse(a);
     currentUpid = parseInt(b["upid"]);
     let courses = b["semestersCourses"];
+    currentName = b["name"];
     for (let i in courses) {
         let course = courses[i];
         let nodeNum = addCourse(course[0]);
